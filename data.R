@@ -20,7 +20,7 @@ official <- read.taf("bootstrap/data/ICES_nominal_catches/ICES_2006_2019_catches
 prelim <- read.taf("bootstrap/data/ICES_nominal_catches/ICES_preliminary_catches.csv")
 
 catch_dat <-
-  format_catches(2021, "Norwegian Sea",
+  format_catches(2022, "Norwegian Sea",
     hist, official, prelim, species_list, sid)
 
 write.taf(catch_dat, dir = "data", quote = TRUE)
@@ -31,8 +31,8 @@ sag_sum <- read.taf("bootstrap/data/SAG_data/SAG_summary.csv")
 sag_refpts <- read.taf("bootstrap/data/SAG_data/SAG_refpts.csv")
 sag_status <- read.taf("bootstrap/data/SAG_data/SAG_status.csv")
 
-clean_sag <- format_sag(sag_sum, sag_refpts, 2021, "Norwegian Sea")
-clean_status <- format_sag_status(sag_status, 2021, "Norwegian Sea")
+clean_sag <- format_sag(sag_sum, sid)
+clean_status <- format_sag_status(sag_status, 2022, "Norwegian Sea")
 
 Norwegian_stockList <- c("aru.27.123a4",
                          "bli.27.nea",
@@ -61,5 +61,5 @@ Norwegian_stockList <- c("aru.27.123a4",
 clean_sag<-clean_sag %>% filter(StockKeyLabel %in% Norwegian_stockList)
 clean_status<-clean_status %>% filter(StockKeyLabel %in% Norwegian_stockList)
 
-write.taf(clean_sag, dir = "data")
+write.taf(clean_sag, dir = "data", quote = TRUE)
 write.taf(clean_status, dir = "data", quote = TRUE)

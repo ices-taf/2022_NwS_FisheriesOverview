@@ -9,8 +9,8 @@ library(dplyr)
 source("bootstrap/utilities.r")
 
 # set values for automatic naming of files:
-cap_year <- 2021
-year_cap <- 2021
+cap_year <- 2022
+year_cap <- 2022
 cap_month <- "November"
 ecoreg_code <- "NwS"
 
@@ -30,7 +30,7 @@ clean_status <- read.taf("data/clean_status.csv")
 # cap_year = "2020"
 # # set year for plot calculations
 
-year = 2021
+year = 2022
 
 
 ###########
@@ -43,10 +43,13 @@ year = 2021
 
 unique(trends$FisheriesGuild)
 
+names(clean_sag)
+test <- trends %>% filter(StockKeyLabel == "reg.27.1-2")
+
 # 1. Demersal
 #~~~~~~~~~~~
 plot_stock_trends(trends, guild="demersal", cap_year, cap_month , return_data = FALSE)
-ggplot2::ggsave(file_name(cap_year,ecoreg_code,"SAG_Trends_demersal", ext = "png"), path = "report/", width = 178, height = 130, units = "mm", dpi = 300)
+ggplot2::ggsave(file_name(cap_year,ecoreg_code,"SAG_Trends_demersal", ext = "png", dir = "report"), width = 178, height = 130, units = "mm", dpi = 300)
 
 dat <- plot_stock_trends(trends, guild="demersal", cap_year , cap_month, return_data = TRUE)
 write.taf(dat, file =file_name(cap_year,ecoreg_code,"SAG_Trends_demersal", ext = "csv"), dir = "report")
