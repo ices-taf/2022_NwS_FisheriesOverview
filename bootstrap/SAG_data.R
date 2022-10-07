@@ -2,7 +2,8 @@ taf.library(icesFO)
 
 
 # summary <- load_sag_summary(2022)
-summary <- load_sag(2022, "Norwegian Sea")
+out <- load_sag(2022, "Norwegian Sea")
+sag_complete <-out
 write.taf(summary, file = "SAG_summary.csv")
 
 # refpts <- load_sag_refpts(2022)
