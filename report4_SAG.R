@@ -13,7 +13,7 @@ cap_year <- 2022
 year_cap <- 2022
 cap_month <- "October"
 ecoreg_code <- "NwS"
-
+ecoreg <- "NwS"
 
 ##########
 #Load data
@@ -134,7 +134,7 @@ kobe <- plot_kobe(catch_current, guild = "demersal", caption = TRUE, cap_year , 
 #kobe_dat <- plot_kobe(catch_current, guild = "Demersal", caption = T, cap_year , cap_month , return_data = TRUE)
 
 #Check this file name
-png(file_name(cap_year,ecoreg_code,"SAG_Current_demersal", ext = "png"),
+png(file_name(cap_year,ecoreg_code,"SAG_Current_demersal", ext = "png",dir = "report"),
     width = 131.32,
     height = 88.9,
     units = "mm",
@@ -154,7 +154,7 @@ write.taf(bar_dat, file =paste0(year_cap, "_", ecoreg, "SAG_Current_pelagic.csv"
 catch_current <- unique(catch_current)
 kobe <- plot_kobe(catch_current, guild = "pelagic", caption = TRUE, cap_year , cap_month , return_data = FALSE)
 #check this file name
-png(file_name(cap_year,ecoreg_code,"SAG_Current_pelagic", ext = "png"),
+png(file_name(cap_year,ecoreg_code,"SAG_Current_pelagic", ext = "png", dir = "report"),
     width = 131.32,
     height = 88.9,
     units = "mm",
@@ -198,7 +198,7 @@ bar <- plot_CLD_bar(top_10, guild = "All", caption = TRUE, cap_year , cap_month 
 
 kobe <- plot_kobe(top_10, guild = "All", caption = TRUE, cap_year, cap_month , return_data = FALSE)
 #check this file name
-png(file_name(cap_year,ecoreg_code,"SAG_Current_All", ext = "png"),
+png(file_name(cap_year,ecoreg_code,"SAG_Current_All", ext = "png", dir = "report"),
     width = 131.32,
     height = 88.9,
     units = "mm",

@@ -27,9 +27,17 @@ write.taf(catch_dat, dir = "data", quote = TRUE)
 
 
 # 2: SAG
-sag_sum <- read.taf("bootstrap/data/SAG_data/SAG_summary.csv")
-sag_refpts <- read.taf("bootstrap/data/SAG_data/SAG_refpts.csv")
-sag_status <- read.taf("bootstrap/data/SAG_data/SAG_status.csv")
+sag_sum <- read.taf("bootstrap/data/SAG_data/SAG_complete_BrS.csv")
+# sag_refpts <- read.taf("bootstrap/data/SAG_data/SAG_refpts.csv")
+sag_status <- read.taf("bootstrap/data/SAG_data/SAG_status_BrS.csv")
+
+
+# 2022 update: this still applies:
+sag_complete$FMSY[which(sag_complete$FishStock == "pok.27.1-2")] <- 0.32
+sag_complete$MSYBtrigger[which(sag_complete$FishStock == "pok.27.1-2")] <- 220000
+
+sag_complete$FMSY[which(sag_complete$FishStock == "cod.27.1-2.coastN")] <- 0.176
+sag_complete$MSYBtrigger[which(sag_complete$FishStock == "cod.27.1-2.coastN")] <- 67743
 
 clean_sag <- format_sag(sag_complete, sid)
 clean_status <- format_sag_status(status, 2022, "Norwegian Sea")
