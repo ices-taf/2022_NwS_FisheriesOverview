@@ -27,9 +27,9 @@ write.taf(catch_dat, dir = "data", quote = TRUE)
 
 
 # 2: SAG
-sag_sum <- read.taf("bootstrap/data/SAG_data/SAG_complete_BrS.csv")
-# sag_refpts <- read.taf("bootstrap/data/SAG_data/SAG_refpts.csv")
-sag_status <- read.taf("bootstrap/data/SAG_data/SAG_status_BrS.csv")
+# sag_sum <- read.taf("bootstrap/data/SAG_data/SAG_complete_BrS.csv")
+# # sag_refpts <- read.taf("bootstrap/data/SAG_data/SAG_refpts.csv")
+# sag_status <- read.taf("bootstrap/data/SAG_data/SAG_status_BrS.csv")
 
 
 # 2022 update: this still applies:
@@ -38,6 +38,9 @@ sag_complete$MSYBtrigger[which(sag_complete$FishStock == "pok.27.1-2")] <- 22000
 
 sag_complete$FMSY[which(sag_complete$FishStock == "cod.27.1-2.coastN")] <- 0.176
 sag_complete$MSYBtrigger[which(sag_complete$FishStock == "cod.27.1-2.coastN")] <- 67743
+
+sag_complete$MSYBtrigger[which(sag_complete$FishStock == "reg.27.1-2")] <- 68600 #PA
+# sag_complete$MSYBtrigger[which(sag_complete$FishStock == "cod.27.1-2")] <- 200000 #PA
 
 clean_sag <- format_sag(sag_complete, sid)
 clean_status <- format_sag_status(status, 2022, "Norwegian Sea")
@@ -69,8 +72,8 @@ Norwegian_stockList <- c("aru.27.123a4",
 clean_sag<-clean_sag %>% filter(StockKeyLabel %in% Norwegian_stockList)
 clean_status<-clean_status %>% filter(StockKeyLabel %in% Norwegian_stockList)
 
-clean_sag$FMSY[which(clean_sag$StockKeyLabel == "pok.27.1-2")] <- 0.32
-clean_sag$MSYBtrigger[which(clean_sag$StockKeyLabel == "pok.27.1-2")] <- 220000
+# clean_sag$FMSY[which(clean_sag$StockKeyLabel == "pok.27.1-2")] <- 0.32
+# clean_sag$MSYBtrigger[which(clean_sag$StockKeyLabel == "pok.27.1-2")] <- 220000
 
 write.taf(clean_sag, dir = "data", quote = TRUE)
 write.taf(clean_status, dir = "data", quote = TRUE)
