@@ -1,5 +1,5 @@
 ## Effort by country
-plot_vms(vms_effort_steft, metric = "country", type = "effort", cap_year= 2021, cap_month= "November", line_count= 6)
+plot_vms(vms_effort_steft, metric = "country", type = "effort", cap_year= 2022, cap_month= "October", line_count= 6)
 # effort_dat$kw_fishing_hours <- effort_dat$kw_fishing_hours/1000
 effort_dat <- vms_effort_steft %>% dplyr::mutate(country = dplyr::recode(country,
                                                                    FR = "France",
