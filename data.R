@@ -21,7 +21,7 @@ prelim <- read.taf("bootstrap/data/ICES_nominal_catches/ICES_preliminary_catches
 
 catch_dat <-
   format_catches(2022, "Norwegian Sea",
-    hist, official, prelim, species_list, sid)
+    hist, official, NULL, species_list, sid)
 
 write.taf(catch_dat, dir = "data", quote = TRUE)
 
@@ -72,8 +72,6 @@ Norwegian_stockList <- c("aru.27.123a4",
 clean_sag<-clean_sag %>% filter(StockKeyLabel %in% Norwegian_stockList)
 clean_status<-clean_status %>% filter(StockKeyLabel %in% Norwegian_stockList)
 
-# clean_sag$FMSY[which(clean_sag$StockKeyLabel == "pok.27.1-2")] <- 0.32
-# clean_sag$MSYBtrigger[which(clean_sag$StockKeyLabel == "pok.27.1-2")] <- 220000
 
 write.taf(clean_sag, dir = "data", quote = TRUE)
 write.taf(clean_status, dir = "data", quote = TRUE)
