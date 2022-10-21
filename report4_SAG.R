@@ -13,7 +13,7 @@ cap_year <- 2022
 year_cap <- 2022
 cap_month <- "October"
 ecoreg_code <- "NwS"
-
+ecoreg <- "NwS"
 
 ##########
 #Load data
@@ -122,6 +122,14 @@ write.taf(dat, file =paste0(year_cap, "_", ecoreg, "_EO_SAG_SpeciesGuildList.csv
 # B.Current catches
 #~~~~~~~~~~~~~~~#
 
+catch_current$Status[which(catch_current$StockKeyLabel == "cod.27.1-2")] <- "GREY" 
+catch_current$Status[which(catch_current$StockKeyLabel == "had.27.1-2")] <- "GREY"  
+catch_current$Status[which(catch_current$StockKeyLabel == "cap.27.1-2")] <- "GREY"  
+catch_current$Status[which(catch_current$StockKeyLabel == "ghl.27.1-2")] <- "GREY"  
+catch_current$Status[which(catch_current$StockKeyLabel == "reb.27.1-2")] <- "GREY"  
+
+
+
 # 1. Demersal
 #~~~~~~~~~~~
 bar <- plot_CLD_bar(catch_current, guild = "demersal", caption = TRUE, cap_year, cap_month, return_data = FALSE)
@@ -129,12 +137,14 @@ bar <- plot_CLD_bar(catch_current, guild = "demersal", caption = TRUE, cap_year,
 bar_dat <- plot_CLD_bar(catch_current, guild = "demersal", caption = TRUE, cap_year , cap_month , return_data = TRUE)
 write.taf(bar_dat, file =paste0(year_cap, "_", ecoreg, "SAG_Current_demersal.csv"), dir = "report" )
 
-kobe <- plot_kobe(catch_current, guild = "demersal", caption = TRUE, cap_year , cap_month , return_data = FALSE)
+catch_current2 <- catch_current %>% filter(StockKeyLabel != ("cod.27.1-2"))
+catch_current2 <- catch_current2 %>% filter(StockKeyLabel != ("had.27.1-2"))
+kobe <- plot_kobe(catch_current2, guild = "demersal", caption = TRUE, cap_year , cap_month , return_data = FALSE)
 #kobe_dat is just like bar_dat with one less variable
 #kobe_dat <- plot_kobe(catch_current, guild = "Demersal", caption = T, cap_year , cap_month , return_data = TRUE)
 
 #Check this file name
-png(file_name(cap_year,ecoreg_code,"SAG_Current_demersal", ext = "png"),
+png(file_name(cap_year,ecoreg_code,"SAG_Current_demersal", ext = "png",dir = "report"),
     width = 131.32,
     height = 88.9,
     units = "mm",
@@ -154,7 +164,7 @@ write.taf(bar_dat, file =paste0(year_cap, "_", ecoreg, "SAG_Current_pelagic.csv"
 catch_current <- unique(catch_current)
 kobe <- plot_kobe(catch_current, guild = "pelagic", caption = TRUE, cap_year , cap_month , return_data = FALSE)
 #check this file name
-png(file_name(cap_year,ecoreg_code,"SAG_Current_pelagic", ext = "png"),
+png(file_name(cap_year,ecoreg_code,"SAG_Current_pelagic", ext = "png", dir = "report"),
     width = 131.32,
     height = 88.9,
     units = "mm",
@@ -196,9 +206,12 @@ write.taf(bar_dat, file =paste0(year_cap, "_", ecoreg, "SAG_Current_all.csv"), d
 top_10 <- bar_dat %>% top_n(10, total)
 bar <- plot_CLD_bar(top_10, guild = "All", caption = TRUE, cap_year , cap_month , return_data = FALSE)
 
-kobe <- plot_kobe(top_10, guild = "All", caption = TRUE, cap_year, cap_month , return_data = FALSE)
+top_ten2 <- top_10 %>% filter(StockKeyLabel != ("cod.27.1-2"))
+top_ten2 <- top_ten2 %>% filter(StockKeyLabel != ("had.27.1-2"))
+
+kobe <- plot_kobe(top_ten2, guild = "All", caption = TRUE, cap_year, cap_month , return_data = FALSE)
 #check this file name
-png(file_name(cap_year,ecoreg_code,"SAG_Current_All", ext = "png"),
+png(file_name(cap_year,ecoreg_code,"SAG_Current_All", ext = "png", dir = "report"),
     width = 131.32,
     height = 88.9,
     units = "mm",
@@ -278,7 +291,7 @@ write.taf(dat, file =paste0(year_cap, "_", ecoreg, "SAG_GESpies.csv"),dir ="repo
 
 dat <- format_annex_table(clean_status, year)
 
-write.taf(dat, file =paste0(year_cap, "_", ecoreg, "SAG_annex_table.csv"),, dir = "report", quote = TRUE)
+write.taf(dat, file =paste0(year_cap, "_", ecoreg, "SAG_annex_table.csv"), dir = "report", quote = TRUE)
 
 format_annex_table_html(dat, cap_year, ecoreg_code)
 # This annex table has to be edited by hand,
