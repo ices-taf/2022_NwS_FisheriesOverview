@@ -42,6 +42,10 @@ sag_complete$MSYBtrigger[which(sag_complete$FishStock == "cod.27.1-2.coastN")] <
 sag_complete$MSYBtrigger[which(sag_complete$FishStock == "reg.27.1-2")] <- 68600 #PA
 # sag_complete$MSYBtrigger[which(sag_complete$FishStock == "cod.27.1-2")] <- 200000 #PA
 
+#DGS has a custom ref point for F but we should not plot the SSB one instead
+sag_complete$FMSY[which(sag_complete$FishStock == "dgs.27.nea")] <- 0.0429543
+sag_complete$MSYBtrigger[which(sag_complete$FishStock == "dgs.27.nea")] <- NA
+
 clean_sag <- format_sag(sag_complete, sid)
 clean_status <- format_sag_status(status, 2022, "Norwegian Sea")
 
@@ -50,19 +54,19 @@ Norwegian_stockList <- c("aru.27.123a4",
                          "bsf.27.nea",
                          "bsk.27.nea",
                          "cap.27.2a514",
-                         "cod.27.1-2",
+                          "cod.27.1-2",
                          "cod.27.1-2.coastN",
                          "dgs.27.nea",
                          "gfb.27.nea",
-                         "ghl.27.1-2",
-                         "had.27.1-2",
+                          "ghl.27.1-2",
+                          "had.27.1-2",
                          "her.27.1-24a514a",
                          "hom.27.2a4a5b6a7a-ce-k8",
                          "lin.27.1-2",
                          "mac.27.nea",
                          "pok.27.1-2",
                          "por.27.nea",
-                         "reb.27.1-2",
+                          "reb.27.1-2",
                          "reg.27.1-2",
                          "rjr.27.23a4",
                          "rng.27.1245a8914ab",
@@ -72,6 +76,8 @@ Norwegian_stockList <- c("aru.27.123a4",
 clean_sag<-clean_sag %>% filter(StockKeyLabel %in% Norwegian_stockList)
 clean_status<-clean_status %>% filter(StockKeyLabel %in% Norwegian_stockList)
 
+#new pies plots without the 5 stocks
+clean_status_rev<-clean_status %>% filter(StockKeyLabel %in% Norwegian_stockList)
 
 write.taf(clean_sag, dir = "data", quote = TRUE)
 write.taf(clean_status, dir = "data", quote = TRUE)
