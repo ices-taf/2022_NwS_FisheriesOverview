@@ -56,6 +56,13 @@ write.taf(dat, file= paste0(year_cap, "_", ecoreg,"SAG_Trends_demersal.csv"), di
 
 # 2. Pelagic
 #~~~~~~~~~~~
+trends <- trends[!(trends$StockKeyLabel == "whb.27.1-91214" & trends$Metric == "F_FMEAN" & trends$Year == 2022) &
+                !(trends$StockKeyLabel == "whb.27.1-91214" & trends$Metric == "F_FMSY" & trends$Year == 2022) &
+                !(trends$StockKeyLabel == "MEAN" & trends$Metric == "F_FMSY" & trends$Year == 2022) &
+                !(trends$StockKeyLabel == "whb.27.1-91214" & trends$Metric == "SSB_MSYBtrigger" & trends$Year == 2023) &
+                !(trends$StockKeyLabel == "MEAN" & trends$Metric == "SSB_MSYBtrigger" & trends$Year == 2023),]
+
+
 plot_stock_trends(trends, guild="pelagic", cap_year, cap_month , return_data = FALSE)
 trends2 <- trends %>% filter(StockKeyLabel != "bsf.27.nea")
 plot_stock_trends(trends2, guild="pelagic", cap_year, cap_month , return_data = FALSE)
@@ -255,6 +262,8 @@ write.taf(dat, file =paste0(year_cap, "_", ecoreg, "SAG_GESpies.csv"),dir ="repo
 dat <- format_annex_table(clean_status, year)
 
 write.taf(dat, file =paste0(year_cap, "_", ecoreg, "SAG_annex_table.csv"), dir = "report", quote = TRUE)
+
+dat <- read.taf("report/2022_NwSSAG_annex_table.csv")
 
 format_annex_table_html(dat, cap_year, ecoreg_code)
 # This annex table has to be edited by hand,
